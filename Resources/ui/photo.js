@@ -13,7 +13,10 @@ btn.addEventListener("click", function(e){
 	Titanium.Media.showCamera({
 		saveToPhotoGallery: false,
 		mediaTypes: [Titanium.Media.MEDIA_TYPE_PHOTO],
+		allowEditing: false,
 		success:function(e){
+			alert("Photo taken.");
+			
 			var img = Titanium.UI.createImageView({
 				image:e.media,
 				top: 20
@@ -26,7 +29,7 @@ btn.addEventListener("click", function(e){
 		},
 		cancel:function(e){
 			alert("Make up your damn mind.");
-		},
+		}
 	})
 })
 
