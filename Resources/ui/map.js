@@ -4,19 +4,19 @@
 
 var win = Titanium.UI.currentWindow;
 
-var map = Titanium.Map.createView({
-	mapType: Titanium.Map.SATELLITE_TYPE,
+var mapView = Titanium.Map.createView({
+	mapType: Titanium.Map.STANDARD_TYPE,
 	animate: true,
 	regionFit: true,
 	userLocation: true,
 	// Titanium.Map.STANDARD_TYPE
 	// Titanium.Map.HYBRID_TYPE
 	region:{
-		latitude:43.85514,
-		longitude:-1.385032,
+		latitude:56.879945,
+		longitude:14.799449,
 		latitudeDelta:1,
 		longitudeDelta:1
 	}
 });
 
-win.add(map);
+win.add(mapView);
