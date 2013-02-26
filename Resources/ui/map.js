@@ -31,28 +31,49 @@ Titanium.Geolocation.getCurrentPosition(function(e) {
 
 	// CREATE ANNOTATION
 
-/*	var annotation = Titanium.Map.createAnnotation({
-		latitude : latitude,
-		longitude : longiude,
-		title : "Your current location",
-		animate : true
+	/*	var annotation = Titanium.Map.createAnnotation({
+	latitude : latitude,
+	longitude : longiude,
+	title : "Your current location",
+	animate : true
 	})
-*/
-	
+	*/
+
 	//
 	//CREATE MAP VIEW
 	//
 	var mapview = Titanium.Map.createView({
-	mapType : Titanium.Map.STANDARD_TYPE,
-	region : {
-	latitude : latitude,
-	longitude : longitude,
-	latitudeDelta : 0.01,
-	longitudeDelta : 0.01
-	},
-	animate : true,
-	regionFit : true,
-	userLocation : true
+		mapType : Titanium.Map.STANDARD_TYPE,
+		region : {
+			latitude : latitude,
+			longitude : longitude,
+			latitudeDelta : 0.01,
+			longitudeDelta : 0.01
+		},
+		animate : true,
+		regionFit : true,
+		userLocation : true
+	});
+
+	win.add(mapview);
+
 });
 
-win.add(mapview);
+/*var win = Titanium.UI.currentWindow;
+
+ var mapView = Titanium.Map.createView({
+ mapType: Titanium.Map.STANDARD_TYPE,
+ animate: true,
+ regionFit: true,
+ userLocation: true,
+ // Titanium.Map.STANDARD_TYPE
+ // Titanium.Map.HYBRID_TYPE
+ region:{
+ latitude:56.879945,
+ longitude:14.799449,
+ latitudeDelta:1,
+ longitudeDelta:1
+ }
+ });
+
+ win.add(mapView);*/
