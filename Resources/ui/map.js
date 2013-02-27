@@ -12,6 +12,26 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 Titanium.Geolocation.distanceFilter = 10;
 
 //
+//CREATE MAP VIEW
+//
+var defaultLatMoliets = 43.855233;
+var defaultLongMoliets = -1.39261;
+var mapview = Titanium.Map.createView({
+	mapType : Titanium.Map.STANDARD_TYPE,
+	region : {
+		latitude : defaultLatMoliets,
+		longitude : defaultLongMoliets,
+		latitudeDelta : 0.01,
+		longitudeDelta : 0.01
+	},
+	animate : true,
+	regionFit : true,
+	userLocation : true
+});
+
+win.add(mapview);
+
+//
 // GET CURRENT POSITION - THIS FIRES ONCE
 //
 Titanium.Geolocation.getCurrentPosition(function(e) {
@@ -38,23 +58,7 @@ Titanium.Geolocation.getCurrentPosition(function(e) {
 	animate : true
 	})
 	*/
-
-	//
-	//CREATE MAP VIEW
-	//
-	var mapview = Titanium.Map.createView({
-		mapType : Titanium.Map.STANDARD_TYPE,
-		region : {
-			latitude : latitude,
-			longitude : longitude,
-			latitudeDelta : 0.01,
-			longitudeDelta : 0.01
-		},
-		animate : true,
-		regionFit : true,
-		userLocation : true
-	});
-
-	win.add(mapview);
-
+	
+	mapview.region.latitude = latitude;
+	mapview.region.longitude = longitude;
 });

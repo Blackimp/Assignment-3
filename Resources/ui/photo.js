@@ -9,6 +9,30 @@ var btn = Titanium.UI.createButton({
 	bottom : 20
 });
 
+
+var latitude = 0;
+var longitude = 0;
+
+// For storing img and location locally
+function storeAsJSON(image) {
+	var encodedImg = Titanium.Utils.base64encode(image.toString);
+	if (latitude != 0 && longitude != 0)
+	{
+		var dictData = {
+			img : encodedImg,
+			latitude : latitude,
+			longitude : longitude
+		}
+	}
+	else
+	{
+		var dictData = {
+			img : encodedImg
+		}
+	}
+	var jsonData = JSON.stringify();
+}
+
 btn.addEventListener("click", function(e) {
 	Titanium.Media.showCamera({
 		saveToPhotoGallery : false,
@@ -24,7 +48,10 @@ btn.addEventListener("click", function(e) {
 			win.add(img);
 			
 			var image = e.media;
+			storeAsJSON(image);
+			
 			var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'camera_photo.png');
+			Titanium.Filesystem.
 			f.write(image);
 			//win.backgroundImage = f.nativePath;
 			
