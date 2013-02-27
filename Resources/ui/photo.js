@@ -9,6 +9,9 @@ var btn = Titanium.UI.createButton({
 	bottom : 20
 });
 
+var latitude = 0;
+var longitude = 0;
+
 btn.addEventListener("click", function(e) {
 	Titanium.Media.showCamera({
 		saveToPhotoGallery : false,
@@ -22,22 +25,41 @@ btn.addEventListener("click", function(e) {
 				top : 20
 			})
 			win.add(img);
-			
+
+			Titanium.Geolocation.getCurrentPosition(function(e) {
+				if (e.error) {
+					alert('HFL cannot get your current location');
+					return;
+				}
+				longitude = e.coords.longitude;
+				latitude = e.coords.latitude;
+			});
+
 			var image = e.media;
 			var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'camera_photo.png');
 			f.write(image);
 			//win.backgroundImage = f.nativePath;
-			
+
 			Ti.Facebook.permissions = ['publish_stream'];
 			Ti.Facebook.authorize();
 
 			// Now post the photo after you've confirmed that authorize() succeeded
 			// var f = Ti.Filesystem.getFile(img);
+
 			var blob = f.read();
-			var data = {
-				message : 'Titanium Mobile Test',
-				picture : blob
+
+			if (latitude != 0 && longitude != 0) {
+				var data = {
+					message : "Latitude: " + latitude + " " + "Longitude: " + longitude,
+					picture : blob
+				}
+			} else {
+				var data = {
+					message : "Couldn't get the current location",
+					picture : blob
+				}
 			};
+
 			Ti.Facebook.requestWithGraphPath('me/photos', data, 'POST', function(e) {
 				if (e.success) {
 					alert("Success!  From FB: " + e.result);
