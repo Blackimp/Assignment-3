@@ -4,6 +4,10 @@
 
 var win = Titanium.UI.currentWindow;
 
+var img = Titanium.UI.createImageView({
+	top : 20
+})
+
 var btn = Titanium.UI.createButton({
 	title : "Make a Photo",
 	bottom : 20
@@ -32,8 +36,10 @@ function storeJSON(image) {
 	var jsonData = JSON.stringify();
 }
 
-// For storing img and location locally
-function loadJSON(image) {
+// For loading img and location
+function loadJSON() {
+	// TODO: write last img to class var 'img'
+}
 
 btn.addEventListener("click", function(e) {
 	Titanium.Media.showCamera({
@@ -42,13 +48,9 @@ btn.addEventListener("click", function(e) {
 		allowEditing : false,
 		success : function(e) {
 			alert("Photo taken.");
-
-			var img = Titanium.UI.createImageView({
-				image : e.media,
-				top : 20
-			})
-			win.add(img);
-
+			
+			img = e.media;
+			
 			Titanium.Geolocation.getCurrentPosition(function(e) {
 				if (e.error) {
 					alert('HFL cannot get your current location');
@@ -105,3 +107,4 @@ btn.addEventListener("click", function(e) {
 })
 
 win.add(btn);
+win.add(img);
