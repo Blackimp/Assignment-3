@@ -21,7 +21,7 @@ function getPosition() {
 
 function storeJSON(image, latitude, longitude, timestamp) {
 	// Gather data
-	var encodedImg = Titanium.Utils.base64encode(image.toString);
+	var encodedImg = Titanium.Utils.base64encode(image.toString());
 	if (latitude && longitude && timestamp) {
 		var dictData = {
 			img : encodedImg,
