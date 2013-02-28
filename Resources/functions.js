@@ -53,11 +53,13 @@ function loadJSON() {
 		return;
 	}
 
+	var decodedImg = Titanium.Utils.base64decode(jsonData);
 	// Convert to dict
 	var data = JSON.parse(jsonData);
 
 	// De-Serialize image
-	var decodedImg = Titanium.Utils.base64decode(data['img']);
+	//var decodedImg = Titanium.Utils.base64decode(data['img']);
+
 	
 	// Collect and return data
 	if (data['latitiude'] && data['longitude'] && data['timestamp']) {
