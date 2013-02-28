@@ -1,16 +1,15 @@
-Titanium.include('../functions.js');
+//Titanium.include('../functions.js');
 
 var win = Titanium.UI.currentWindow;
 
-
-var timestampLabel = Titanium.UI.createLabel({
+/*var timestampLabel = Titanium.UI.createLabel({
 	top : 20
 });
 
 var locationLabel = Titanium.UI.createLabel({
 	text : "no image taken before",
 	top : 50
-});
+});*/
 
 var img = Titanium.UI.createImageView({
 	top : 80
@@ -25,12 +24,12 @@ var latitude = 0;
 var longitude = 0;
 
 // Loading last img and location
-var oldData = loadJSON();
-if (oldData) {
-	img.image = oldData['img'];
-	timestampLabel = "taken: " + oldData['timestamp'];
-	locationLabel = "lat: " + oldData['latitude'] + " long: " + oldData['longitude'];
-}
+/*var oldData = loadJSON();
+ if (oldData) {
+ img.image = oldData['img'];
+ timestampLabel = "taken: " + oldData['timestamp'];
+ locationLabel = "lat: " + oldData['latitude'] + " long: " + oldData['longitude'];
+ }*/
 
 btn.addEventListener("click", function(e) {
 	Titanium.Media.showCamera({
@@ -39,20 +38,20 @@ btn.addEventListener("click", function(e) {
 		allowEditing : false,
 		success : function(e) {
 			alert("Photo taken.");
-			
+
 			img.image = e.media;
-			
+
 			// store local JSON
-			var returnDict = getPosition();
-			if (returnDict)
-			{
-				storeJSON(e.media, returnDict['latitiude'], returnDict['longitiude'], returnDict['timestamp']);
-			}
-			else
-			{
-				storeJSON(e.media);
-			}
-			
+			/*var returnDict = getPosition();
+			 if (returnDict)
+			 {
+			 storeJSON(e.media, returnDict['latitiude'], returnDict['longitiude'], returnDict['timestamp']);
+			 }
+			 else
+			 {
+			 storeJSON(e.media);
+			 }*/
+
 			Titanium.Geolocation.getCurrentPosition(function(e) {
 				if (e.error) {
 					alert('HFL cannot get your current location');
@@ -110,5 +109,5 @@ btn.addEventListener("click", function(e) {
 
 win.add(btn);
 win.add(img);
-win.add(timestampLabel);
-win.add(locationLabel);
+//win.add(timestampLabel);
+//win.add(locationLabel);
