@@ -1,5 +1,6 @@
-Titanium.include('../functions.js');
-
+/**
+ * MAP  CONTENT
+ */
 var win = Titanium.UI.currentWindow;
 
 Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
@@ -11,34 +12,68 @@ Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 Titanium.Geolocation.distanceFilter = 10;
 
 //
-//CREATE MAP VIEW
+// GET CURRENT POSITION - THIS FIRES ONCE
 //
-var mapview = Titanium.Map.createView({
-	mapType : Titanium.Map.STANDARD_TYPE,
-	animate : true,
-	regionFit : false,
-	userLocation : false
+Titanium.Geolocation.getCurrentPosition(function(e) {
+	if (e.error) {
+		alert('HFL cannot get your current location');
+		return;
+	}
+
+	var longitude = e.coords.longitude;
+	var latitude = e.coords.latitude;
+	var altitude = e.coords.altitude;
+	var heading = e.coords.heading;
+	var accuracy = e.coords.accuracy;
+	var speed = e.coords.speed;
+	var timestamp = e.coords.timestamp;
+	var altitudeAccuracy = e.coords.altitudeAccuracy;
+
+	// CREATE ANNOTATION
+
+	/*	var annotation = Titanium.Map.createAnnotation({
+	latitude : latitude,
+	longitude : longiude,
+	title : "Your current location",
+	animate : true
+	})
+	*/
+
+	//
+	//CREATE MAP VIEW
+	//
+	var mapview = Titanium.Map.createView({
+		mapType : Titanium.Map.STANDARD_TYPE,
+		region : {
+			latitude : latitude,
+			longitude : longitude,
+			latitudeDelta : 0.01,
+			longitudeDelta : 0.01
+		},
+		animate : true,
+		regionFit : true,
+		userLocation : true
+	});
+
+	win.add(mapview);
+
 });
 
-win.add(mapview);
+/*var win = Titanium.UI.currentWindow;
 
-var returnDict = getPosition();
-if (returnDict)
-{
-	region = {
-		latitude : returnDict['latitiude'],
-		longitude : returnDict['longitude'],
-		latitudeDelta : 1,
-		longitudeDelta : 1
-	}
-	
-	mapview.hide();
-	mapview.setLocation(region);
-	// Test Implementierung (konnte es nicht testen, da kein USB Kabel vorhanden)
-	mapview.setRegionFit(true);
-	mapview.setUserLocation(true);
-	mapview.setCenter(region.latitude, region.longitude);
-	// Test Implementierung Ende
-	
-	mapview.show();
-}
+ var mapView = Titanium.Map.createView({
+ mapType: Titanium.Map.STANDARD_TYPE,
+ animate: true,
+ regionFit: true,
+ userLocation: true,
+ // Titanium.Map.STANDARD_TYPE
+ // Titanium.Map.HYBRID_TYPE
+ region:{
+ latitude:56.879945,
+ longitude:14.799449,
+ latitudeDelta:1,
+ longitudeDelta:1
+ }
+ });
+
+ win.add(mapView);*/

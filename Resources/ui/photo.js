@@ -1,15 +1,15 @@
-Titanium.include('../functions.js');
+//Titanium.include('../functions.js');
 
 var win = Titanium.UI.currentWindow;
 
-var timestampLabel = Titanium.UI.createLabel({
+/*var timestampLabel = Titanium.UI.createLabel({
 	top : 20
 });
 
 var locationLabel = Titanium.UI.createLabel({
 	text : "no image taken before",
 	top : 50
-});
+});*/
 
 var img = Titanium.UI.createImageView({
 	top : 80
@@ -22,23 +22,6 @@ var btn = Titanium.UI.createButton({
 
 var latitude = 0;
 var longitude = 0;
-
-// For storing img and location locally
-/*function storeJSON(image) {
-	var encodedImg = Titanium.Utils.base64encode(image.toString);
-	if (latitude != 0 && longitude != 0) {
-		var dictData = {
-			img : encodedImg,
-			latitude : latitude,
-			longitude : longitude
-		}
-	} else {
-		var dictData = {
-			img : encodedImg
-		}
-	}
-	var jsonData = JSON.stringify();
-}*/
 
 // Loading last img and location
 /*var oldData = loadJSON();
@@ -126,5 +109,5 @@ btn.addEventListener("click", function(e) {
 
 win.add(btn);
 win.add(img);
-win.add(timestampLabel);
-win.add(locationLabel);
+//win.add(timestampLabel);
+//win.add(locationLabel);
