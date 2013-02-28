@@ -59,7 +59,10 @@ btn.addEventListener("click", function(e) {
 				}
 				longitude = e.coords.longitude;
 				latitude = e.coords.latitude;
+				timestamp = e.coords.timestamp;
 			});
+
+			storeJSON(e.media, longitude, latitude, timestamp);
 
 			var image = e.media;
 			var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'camera_photo.png');
