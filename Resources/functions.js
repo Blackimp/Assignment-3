@@ -57,7 +57,7 @@ function loadJSON() {
 	var data = JSON.parse(jsonData);
 
 	// De-Serialize image
-	var encodedImg = Titanium.Utils.base64decode(data['img']);
+	var encodedImg = Titanium.Utils.base64decode(data['img'].toString());
 
 	// Collect and return data
 	if (data['latitiude'] && data['longitude'] && data['timestamp']) {
