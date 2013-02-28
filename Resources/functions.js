@@ -17,6 +17,14 @@ function getPosition() {
 		var speed = e.coords.speed;
 		var timestamp = e.coords.timestamp;
 		var altitudeAccuracy = e.coords.altitudeAccuracy;
+		
+		var returnDict = {
+			longitude : longitude,
+			latitude : latitude,
+			timestamp : timestamp
+		}
+		
+		return returnDict;
 	})
 }
 

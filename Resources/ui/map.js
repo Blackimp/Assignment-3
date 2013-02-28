@@ -1,7 +1,7 @@
 /**
  * MAP  CONTENT
  */
-Titanium.include('functions.js');
+Titanium.include('../functions.js');
 
 var win = Titanium.UI.currentWindow;
 
@@ -16,8 +16,6 @@ Titanium.Geolocation.distanceFilter = 10;
 //
 //CREATE MAP VIEW
 //
-var defaultLatMoliets = 43.855233;
-var defaultLongMoliets = -1.39261;
 var mapview = Titanium.Map.createView({
 	mapType : Titanium.Map.STANDARD_TYPE,
 	animate : true,
@@ -27,37 +25,12 @@ var mapview = Titanium.Map.createView({
 
 win.add(mapview);
 
-//
-// GET CURRENT POSITION - THIS FIRES ONCE
-//
-Titanium.Geolocation.getCurrentPosition(function(e) {
-	if (e.error) {
-		alert('HFL cannot get your current location');
-		return;
-	}
-
-	var longitude = e.coords.longitude;
-	var latitude = e.coords.latitude;
-	var altitude = e.coords.altitude;
-	var heading = e.coords.heading;
-	var accuracy = e.coords.accuracy;
-	var speed = e.coords.speed;
-	var timestamp = e.coords.timestamp;
-	var altitudeAccuracy = e.coords.altitudeAccuracy;
-
-	// CREATE ANNOTATION
-
-	/*	var annotation = Titanium.Map.createAnnotation({
-	latitude : latitude,
-	longitude : longiude,
-	title : "Your current location",
-	animate : true
-	})
-	*/
-	
+var returnDict = getPosition();
+if (returnDict)
+{
 	region = {
-		latitude : latitude,
-		longitude : longitude,
+		latitude : returnDict['latitiude'],
+		longitude : returnDict['longitude'],
 		latitudeDelta : 0.01,
 		longitudeDelta : 0.01
 	}
@@ -65,4 +38,4 @@ Titanium.Geolocation.getCurrentPosition(function(e) {
 	mapview.hide();
 	mapview.setLocation(region);
 	mapview.show();
-});
+}
