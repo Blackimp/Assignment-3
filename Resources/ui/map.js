@@ -18,12 +18,6 @@ var defaultLatMoliets = 43.855233;
 var defaultLongMoliets = -1.39261;
 var mapview = Titanium.Map.createView({
 	mapType : Titanium.Map.STANDARD_TYPE,
-	region : {
-		latitude : defaultLatMoliets,
-		longitude : defaultLongMoliets,
-		latitudeDelta : 0.01,
-		longitudeDelta : 0.01
-	},
 	animate : true,
 	regionFit : true,
 	userLocation : true
