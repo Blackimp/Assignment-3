@@ -16,7 +16,7 @@ function getPosition() {
 		}
 		
 		return returnDict;
-	})
+	});
 }
 
 function storeJSON(image, latitude, longitude, timestamp) {

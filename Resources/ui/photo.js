@@ -24,26 +24,6 @@ var btn = Titanium.UI.createButton({
 var latitude = 0;
 var longitude = 0;
 
-// For storing img and location locally
-function storeJSON(image) {
-	var encodedImg = Titanium.Utils.base64encode(image.toString);
-	if (latitude != 0 && longitude != 0)
-	{
-		var dictData = {
-			img : encodedImg,
-			latitude : latitude,
-			longitude : longitude
-		}
-	}
-	else
-	{
-		var dictData = {
-			img : encodedImg
-		}
-	}
-	var jsonData = JSON.stringify();
-}
-
 // Loading last img and location
 var oldData = loadJSON();
 if (oldData) {
