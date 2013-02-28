@@ -24,14 +24,14 @@ function storeJSON(image, latitude, longitude, timestamp) {
 	var encodedImg = Titanium.Utils.base64encode(image.toString());
 	if (latitude && longitude && timestamp) {
 		var dictData = {
-			img : encodedImg,
+			img : encodedImg['text'],
 			latitude : latitude,
 			longitude : longitude,
 			timestamp : timestamp
 		}
 	} else {
 		var dictData = {
-			img : encodedImg
+			img : encodedImg['text']
 		}
 	}
 	
@@ -58,12 +58,12 @@ function loadJSON() {
 	var data = JSON.parse(jsonData);
 	
 	// De-Serialize image
-	var encodedImg = Titanium.Utils.base64decode(data['img'].toString());
+	var decodedImg = Titanium.Utils.base64decode(data['img']);
 	
 	// Collect and return data
 	if (data['latitiude'] && data['longitude'] && data['timestamp']) {
 		returnDict = {
-			img : encodedImg,
+			img : decodedImg,
 			latitude : data['latitiude'],
 			longitude : data['longitude'],
 			timestamp : data['timestamp']
@@ -71,7 +71,7 @@ function loadJSON() {
 	}
 	else {
 		returnDict = {
-			img : encodedImg
+			img : decodedImg
 		}
 	}
 	return returnDict;

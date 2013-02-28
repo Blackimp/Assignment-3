@@ -4,11 +4,27 @@ var win = Titanium.UI.currentWindow;
 // FUNCTIONS
 //
 function devStoreJSON(testString) {
+	// Gather data
+	/*
+	var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'tempdevimg.png');
+        f.write(devGetImg.toImage());
+        alert(f.nativePath); // it will return the native path of image
+                blob = f.read();
+	*/
+	
+	var imgData = devGetImg.toBlob();
+	
+	var encodedImg = Titanium.Utils.base64encode(imgData);
+	var data = {
+		img : encodedImg['text'],
+		text : testString
+	}
+	
 	// Convert to JSON
-	var jsonData = JSON.stringify(testString);
+	var jsonData = JSON.stringify(data);
 	
 	// Store JSON
-	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'dev.json');
+	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.externalStorageDirectory, 'dev.json');
 	file.write(jsonData);
 
 }
@@ -16,7 +32,7 @@ function devStoreJSON(testString) {
 // For loading img and location
 function devLoadJSON() {
 	// Get JSON
-	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'dev.json');
+	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.externalStorageDirectory, 'dev.json');
 	if (file.exists()) {
 	    jsonData = file.read();
 	}
@@ -28,7 +44,7 @@ function devLoadJSON() {
 	var data = JSON.parse(jsonData);
 	
 	// Collect and return data
-	return jsonData;
+	return data;
 }
 
 //
@@ -53,10 +69,23 @@ var devGetBtn = Titanium.UI.createButton({
 	top : 200
 });
 
+var devGetImg = Titanium.UI.createImageView({
+	image : "/images/test.jpg",
+	bottom : 40,
+	height : 30,
+	width : 80
+});
+
+var devPutImg = Titanium.UI.createImageView({
+	top : 300
+});
+
 devGetBtn.addEventListener("click", function(e){
-	if (devLoadJSON())
+	var dict = devLoadJSON();
+	if (dict)
 	{
-		devLabel.text = "JSON: " + devLoadJSON();
+		devLabel.text = "JSON: " + dict['text'];
+		devPutImg.image = Titanium.Utils.base64decode(dict['img']);
 	}
 });
 
@@ -68,3 +97,5 @@ win.add(devInput);
 win.add(devLabel);
 win.add(devBtn);
 win.add(devGetBtn);
+win.add(devPutImg);
+win.add(devGetImg);
