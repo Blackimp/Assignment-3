@@ -16,8 +16,8 @@ Titanium.Geolocation.distanceFilter = 10;
 var mapview = Titanium.Map.createView({
 	mapType : Titanium.Map.STANDARD_TYPE,
 	animate : true,
-	regionFit : true,
-	userLocation : true
+	regionFit : false,
+	userLocation : false
 });
 
 win.add(mapview);
@@ -28,11 +28,17 @@ if (returnDict)
 	region = {
 		latitude : returnDict['latitiude'],
 		longitude : returnDict['longitude'],
-		latitudeDelta : 0.01,
-		longitudeDelta : 0.01
+		latitudeDelta : 1,
+		longitudeDelta : 1
 	}
 	
 	mapview.hide();
 	mapview.setLocation(region);
+	// Test Implementierung (konnte es nicht testen, da kein USB Kabel vorhanden)
+	mapview.setRegionFit(true);
+	mapview.setUserLocation(true);
+	mapview.setCenter(region.latitude, region.longitude);
+	// Test Implementierung Ende
+	
 	mapview.show();
 }

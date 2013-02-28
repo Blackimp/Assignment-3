@@ -2,7 +2,6 @@ Titanium.include('../functions.js');
 
 var win = Titanium.UI.currentWindow;
 
-
 var timestampLabel = Titanium.UI.createLabel({
 	top : 20
 });
@@ -25,32 +24,29 @@ var latitude = 0;
 var longitude = 0;
 
 // For storing img and location locally
-function storeJSON(image) {
+/*function storeJSON(image) {
 	var encodedImg = Titanium.Utils.base64encode(image.toString);
-	if (latitude != 0 && longitude != 0)
-	{
+	if (latitude != 0 && longitude != 0) {
 		var dictData = {
 			img : encodedImg,
 			latitude : latitude,
 			longitude : longitude
 		}
-	}
-	else
-	{
+	} else {
 		var dictData = {
 			img : encodedImg
 		}
 	}
 	var jsonData = JSON.stringify();
-}
+}*/
 
 // Loading last img and location
-var oldData = loadJSON();
-if (oldData) {
-	img.image = oldData['img'];
-	timestampLabel = "taken: " + oldData['timestamp'];
-	locationLabel = "lat: " + oldData['latitude'] + " long: " + oldData['longitude'];
-}
+/*var oldData = loadJSON();
+ if (oldData) {
+ img.image = oldData['img'];
+ timestampLabel = "taken: " + oldData['timestamp'];
+ locationLabel = "lat: " + oldData['latitude'] + " long: " + oldData['longitude'];
+ }*/
 
 btn.addEventListener("click", function(e) {
 	Titanium.Media.showCamera({
@@ -59,20 +55,20 @@ btn.addEventListener("click", function(e) {
 		allowEditing : false,
 		success : function(e) {
 			alert("Photo taken.");
-			
+
 			img.image = e.media;
-			
+
 			// store local JSON
-			var returnDict = getPosition();
-			if (returnDict)
-			{
-				storeJSON(e.media, returnDict['latitiude'], returnDict['longitiude'], returnDict['timestamp']);
-			}
-			else
-			{
-				storeJSON(e.media);
-			}
-			
+			/*var returnDict = getPosition();
+			 if (returnDict)
+			 {
+			 storeJSON(e.media, returnDict['latitiude'], returnDict['longitiude'], returnDict['timestamp']);
+			 }
+			 else
+			 {
+			 storeJSON(e.media);
+			 }*/
+
 			Titanium.Geolocation.getCurrentPosition(function(e) {
 				if (e.error) {
 					alert('HFL cannot get your current location');
