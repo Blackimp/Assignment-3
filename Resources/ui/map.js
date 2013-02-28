@@ -1,6 +1,8 @@
 /**
  * MAP  CONTENT
  */
+Titanium.include('functions.js');
+
 var win = Titanium.UI.currentWindow;
 
 Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
