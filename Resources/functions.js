@@ -40,11 +40,7 @@ function storeJSON(image, latitude, longitude, timestamp) {
 	
 	// Store JSON
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'lastpic.json');
-	file.createFile();
-	
-	if (file.exists()){
-	    file.write(jsonData);
-	}
+	file.write(jsonData);
 }
 
 // For loading img and location
