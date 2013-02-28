@@ -1,13 +1,20 @@
-/**
- * PHOTO  CONTENT
- */
-Titanium.include('functions.js');
+Titanium.include('../functions.js');
 
 var win = Titanium.UI.currentWindow;
 
-var img = Titanium.UI.createImageView({
+
+var timestampLabel = Titanium.UI.createLabel({
 	top : 20
-})
+});
+
+var locationLabel = Titanium.UI.createLabel({
+	text : "no image taken before",
+	top : 50
+});
+
+var img = Titanium.UI.createImageView({
+	top : 80
+});
 
 var btn = Titanium.UI.createButton({
 	title : "Make a Photo",
@@ -37,9 +44,12 @@ function storeJSON(image) {
 	var jsonData = JSON.stringify();
 }
 
-// For loading img and location
-function loadJSON() {
-	// TODO: write last img to class var 'img'
+// Loading last img and location
+var oldData = loadJSON();
+if (oldData) {
+	img.image = oldData['img'];
+	timestampLabel = "taken: " + oldData['timestamp'];
+	locationLabel = "lat: " + oldData['latitude'] + " long: " + oldData['longitude'];
 }
 
 btn.addEventListener("click", function(e) {
@@ -51,6 +61,17 @@ btn.addEventListener("click", function(e) {
 			alert("Photo taken.");
 			
 			img.image = e.media;
+			
+			// store local JSON
+			var returnDict = getPosition();
+			if (returnDict)
+			{
+				storeJSON(e.media, returnDict['latitiude'], returnDict['longitiude'], returnDict['timestamp']);
+			}
+			else
+			{
+				storeJSON(e.media);
+			}
 			
 			Titanium.Geolocation.getCurrentPosition(function(e) {
 				if (e.error) {
@@ -109,3 +130,5 @@ btn.addEventListener("click", function(e) {
 
 win.add(btn);
 win.add(img);
+win.add(timestampLabel);
+win.add(locationLabel);

@@ -1,7 +1,3 @@
-/**
- * FACEBOOK  CONTENT
- */
-
 var win = Titanium.UI.currentWindow;
 
 Ti.Facebook.appid = '442274525852593';

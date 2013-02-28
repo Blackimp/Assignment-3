@@ -1,7 +1,3 @@
-/**
- * @author Julian
- */
-
 function getPosition() {
 	Titanium.Geolocation.getCurrentPosition(function(e) {
 		if (e.error) {
@@ -11,12 +7,7 @@ function getPosition() {
 
 		var longitude = e.coords.longitude;
 		var latitude = e.coords.latitude;
-		var altitude = e.coords.altitude;
-		var heading = e.coords.heading;
-		var accuracy = e.coords.accuracy;
-		var speed = e.coords.speed;
 		var timestamp = e.coords.timestamp;
-		var altitudeAccuracy = e.coords.altitudeAccuracy;
 		
 		var returnDict = {
 			longitude : longitude,
@@ -28,28 +19,68 @@ function getPosition() {
 	})
 }
 
-function storeJSON(image) {
+function storeJSON(image, latitude, longitude, timestamp) {
+	// Gather data
 	var encodedImg = Titanium.Utils.base64encode(image.toString);
-	if (latitude != 0 && longitude != 0) {
+	if (latitude && longitude && timestamp) {
 		var dictData = {
 			img : encodedImg,
 			latitude : latitude,
-			longitude : longitude
+			longitude : longitude,
+			timestamp : timestamp
 		}
 	} else {
 		var dictData = {
 			img : encodedImg
 		}
 	}
-	var jsonData = JSON.stringify();
+	
+	// Convert to JSON
+	var jsonData = JSON.stringify(dictData);
+	
+	// Store JSON
+	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'lastpic.json');
+	file.createFile();
+	
+	if (file.exists()){
+	    file.write(jsonData);
+	}
 }
 
 // For loading img and location
 function loadJSON() {
-	// TODO: write last img to class var 'img'
+	// Get JSON
+	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'lastpic.json');
+	if (file.exists()) {
+	    jsonData = file.read();
+	}
+	else {
+		return;
+	}
+	
+	// Convert to dict
+	var data = JSON.parse(jsonData);
+	
+	// De-Serialize image
+	var encodedImg = Titanium.Utils.base64decode(data['img']);
+	
+	// Collect and return data
+	if (data['latitiude'] && data['longitude'] && data['timestamp']) {
+		returnDict = {
+			img : encodedImg,
+			latitude : data['latitiude'],
+			longitude : data['longitude'],
+			timestamp : data['timestamp']
+		}
+	}
+	else {
+		returnDict = {
+			img : encodedImg
+		}
+	}
+	return returnDict;
 }
 
 function publishPhoto() {
 
 }
-

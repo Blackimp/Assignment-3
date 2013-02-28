@@ -1,6 +1,3 @@
-/**
- * MAP  CONTENT
- */
 Titanium.include('../functions.js');
 
 var win = Titanium.UI.currentWindow;
