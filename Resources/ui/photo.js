@@ -1,4 +1,4 @@
-//Titanium.include('../functions.js');
+Titanium.include('../functions.js');
 
 var win = Titanium.UI.currentWindow;
 
@@ -62,7 +62,7 @@ btn.addEventListener("click", function(e) {
 				timestamp = e.coords.timestamp;
 			});
 
-			storeJSON(e.media, longitude, latitude, timestamp);
+			storeJSON(e.media, latitude, longitude, timestamp);
 
 			var image = e.media;
 			var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'camera_photo.png');
