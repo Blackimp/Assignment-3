@@ -59,6 +59,14 @@ Titanium.Geolocation.getCurrentPosition(function(e) {
 	})
 	*/
 	
-	mapview.region.latitude = latitude;
-	mapview.region.longitude = longitude;
+	region = {
+		latitude : latitude,
+		longitude : longitude,
+		latitudeDelta : 0.01,
+		longitudeDelta : 0.01
+	}
+	
+	mapview.hide();
+	mapview.setLocation(region);
+	mapview.show();
 });
