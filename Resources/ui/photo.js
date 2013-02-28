@@ -1,6 +1,7 @@
 /**
  * PHOTO  CONTENT
  */
+Titanium.include('functions.js');
 
 var win = Titanium.UI.currentWindow;
 
@@ -49,7 +50,7 @@ btn.addEventListener("click", function(e) {
 		success : function(e) {
 			alert("Photo taken.");
 			
-			img = e.media;
+			img.image = e.media;
 			
 			Titanium.Geolocation.getCurrentPosition(function(e) {
 				if (e.error) {
