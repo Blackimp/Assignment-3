@@ -8,13 +8,13 @@ function getPosition() {
 		var longitude = e.coords.longitude;
 		var latitude = e.coords.latitude;
 		var timestamp = e.coords.timestamp;
-		
+
 		var returnDict = {
 			longitude : longitude,
 			latitude : latitude,
 			timestamp : timestamp
 		}
-		
+
 		return returnDict;
 	});
 }
@@ -34,10 +34,10 @@ function storeJSON(image, latitude, longitude, timestamp) {
 			img : encodedImg
 		}
 	}
-	
+
 	// Convert to JSON
 	var jsonData = JSON.stringify(dictData);
-	
+
 	// Store JSON
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'lastpic.json');
 	file.write(jsonData);
@@ -48,18 +48,17 @@ function loadJSON() {
 	// Get JSON
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'lastpic.json');
 	if (file.exists()) {
-	    jsonData = file.read();
-	}
-	else {
+		jsonData = file.read();
+	} else {
 		return;
 	}
-	
+
 	// Convert to dict
 	var data = JSON.parse(jsonData);
-	
+
 	// De-Serialize image
 	var encodedImg = Titanium.Utils.base64decode(data['img']);
-	
+
 	// Collect and return data
 	if (data['latitiude'] && data['longitude'] && data['timestamp']) {
 		returnDict = {
@@ -68,8 +67,7 @@ function loadJSON() {
 			longitude : data['longitude'],
 			timestamp : data['timestamp']
 		}
-	}
-	else {
+	} else {
 		returnDict = {
 			img : encodedImg
 		}
