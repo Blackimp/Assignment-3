@@ -90,9 +90,9 @@ btn.addEventListener("click", function(e) {
 				timestamp = e.coords.timestamp;
 			});
 
-			if (latitude != 0 && longitude != 0 && timestamp != 0)
+			if (latitude != 0 && longitude != 0)
 			{				
-				storeJSON(e.media, latitude, longitude, timestamp.toString('yyyy-MM-dd'));
+				storeJSON(e.media, latitude, longitude, new Date().toDateString());
 			}
 			else
 			{
