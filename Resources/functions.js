@@ -60,11 +60,15 @@ function loadJSON() {
 	//alert(data['img']);
 	var decodedImg = Titanium.Utils.base64decode(data['img']);
 	
-	// De-Serialize image
-	//var decodedImg = Titanium.Utils.base64decode(data['img']);
-
-	
 	// Collect and return data
+	returnDict = {
+		img : decodedImg,
+		latitude : data['latitiude'],
+		longitude : data['longitude'],
+		timestamp : data['timestamp']
+	}
+		
+	/*
 	if (data['latitiude'] && data['longitude'] && data['timestamp']) {
 		returnDict = {
 			img : decodedImg,
@@ -77,6 +81,8 @@ function loadJSON() {
 			img : decodedImg
 		}
 	}
+	*/
+	
 	return returnDict;
 }
 
