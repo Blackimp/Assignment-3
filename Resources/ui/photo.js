@@ -92,7 +92,7 @@ btn.addEventListener("click", function(e) {
 
 			if (latitude != 0 && longitude != 0 && timestamp != 0)
 			{				
-				storeJSON(e.media, latitude, longitude, timestamp);
+				storeJSON(e.media, latitude, longitude, timestamp.toString('yyyy-MM-dd'));
 			}
 			else
 			{
