@@ -63,7 +63,7 @@ function loadJSON() {
 	// Collect and return data
 	returnDict = {
 		img : decodedImg,
-		latitude : data['latitiude'],
+		latitude : data['latitude'],
 		longitude : data['longitude'],
 		timestamp : data['timestamp']
 	}
