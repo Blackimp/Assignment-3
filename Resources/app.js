@@ -37,6 +37,7 @@ var photoTab = Titanium.UI.createTab({
 	window: photoWin
 });
 
+/*
 var devWin = Titanium.UI.createWindow({
 	title: "Dev Screen",
 	url: "ui/dev.js"
@@ -46,10 +47,11 @@ var devTab = Titanium.UI.createTab({
 	title: "Dev",
 	window: devWin
 });
+tabGroup.addTab(devTab);
+*/
 
 tabGroup.addTab(fbTab);
 tabGroup.addTab(mapTab);
 tabGroup.addTab(photoTab);
-tabGroup.addTab(devTab);
 
 tabGroup.open();

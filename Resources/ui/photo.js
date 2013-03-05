@@ -66,7 +66,7 @@ loadbtn.addEventListener("click", function(e) {
 	if (oldData) {
 		storedimg.image = oldData['img'];
 		timestampLabel.text = "taken: " + oldData['timestamp'];
-		locationLabel.text = "lat: " + oldData['latitude'] + " long: " + oldData['longitude'];
+		locationLabel.text = "lat: " + oldData['latitude'] + "\n long: " + oldData['longitude'];
 	}
 });
 
